@@ -8,6 +8,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Src</th>
                 <td scope="col">Delete</td>
+                <td scoop='col'>Edit</td>
               </tr>
             </thead>
             <tbody>
@@ -22,6 +23,9 @@
                             @csrf
                             @method('DELETE')
                             <button class='btn btn-danger' type='submit'>DELETTE</button></form>
+                        </td>
+                        <td>
+                            <a href="/files/{{$file->id}}/edit">EDITE</a>
                         </td>
                     </tr>
                 @endforeach

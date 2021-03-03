@@ -61,9 +61,10 @@ class FileController extends Controller
      * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function edit(File $file)
+    public function edit($id)
     {
-        //
+        $edit = File::find($id);
+        return view('backoffice.edit',compact('edit'));
     }
 
     /**
@@ -73,9 +74,14 @@ class FileController extends Controller
      * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $file)
+    public function update(Request $request, $id)
     {
-        //
+        $update = File::find($id);
+        Storage::delete('public/img/'.$update->src);
+        Storage::put('public/img', $request->file(('src')));
+        $update->src = $request->file('src')->hashName();
+        $update->save();
+        return redirect('/files');
     }
 
     /**
