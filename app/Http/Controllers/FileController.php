@@ -97,4 +97,9 @@ class FileController extends Controller
         $destroy->delete();
         return redirect('/files');
     }
+    public function download($id)
+    {
+        $down = File::find($id);
+        return Storage::download('public/img/'.$down->src);
+    }
 }
